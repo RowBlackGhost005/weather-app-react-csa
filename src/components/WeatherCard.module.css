@@ -1,0 +1,84 @@
+p {
+    margin: 0;
+}
+
+.weatherCard {
+    border: 2px solid ;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    max-width: 256px;
+    background-color: #eaf1f9;
+}
+
+.weatherCardHeader {
+    background-color: #3a8dde;
+    border-radius: 14px 14px 0 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.forecastImg {
+    min-width: 64px;
+    min-height: 64px;
+    max-width: 128px;
+    max-height: 128px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.my1{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.fontLarge {
+    font-size: x-large;
+}
+
+.textAccent {
+    font-weight: bold;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.textStart {
+    text-align: start;
+}
+
+.textEnd {
+    text-align: end;
+}
+
+.flexItem {
+    flex: 1;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.headerText {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.cardText {
+    font-size: large;
+}
+
+.borderBottom {
+    border-bottom: 1px solid;
+}
+
+.divisionShadow {
+    width: 80%;
+    border: none;
+    border-top: 1px solid rgba(0,0,0, 0.3);
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
+}
