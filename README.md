@@ -16,6 +16,3 @@ Web app developed in React that fetches a 7-day forecast based on user city quer
 5. Type `npm start` to run the app.
 
 The app will be available at http://localhost:3000
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
