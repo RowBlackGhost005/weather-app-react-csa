@@ -2,6 +2,8 @@
 
 Web app developed in React that fetches a 7-day forecast based on user city query.
 
+Try it out: https://weather-app-react-csa.vercel.app/
+
 # Features
 
 * Query any city.
