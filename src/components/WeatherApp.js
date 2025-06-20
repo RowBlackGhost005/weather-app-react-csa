@@ -1,6 +1,7 @@
 import React , {useState , useCallback} from 'react';
 
 import WeatherForecast from './WeatherForecast';
+import WeatherCurrent from './WeatherCurrent';
 
 function WeatherApp(){
 
@@ -25,6 +26,7 @@ function WeatherApp(){
 
     const [locationName , setLocationName] = useState("");
     const [weatherData , setWeatherData] = useState([]);
+    const [currentWeather , setCurrentWeather] = useState([]);
     const [isFetching , setFetching] = useState(false);
     const [errorState , setErrorState] = useState(false);
 
@@ -48,7 +50,7 @@ function WeatherApp(){
 
             //Fetching weather data with coordinates
             
-            const resWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${locationData[0].lat}&longitude=${locationData[0].lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,temperature_2m_mean,wind_speed_10m_mean&hourly=temperature_2m&timezone=auto`);
+            const resWeather = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${locationData[0].lat}&longitude=${locationData[0].lon}&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,temperature_2m_mean,wind_speed_10m_mean&hourly=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,precipitation_probability&timezone=auto`);
 
             if(!resWeather.ok){
                 throw new Error(`HTTP error! Status: ${resWeather.status}`);
@@ -58,8 +60,14 @@ function WeatherApp(){
 
             const weatherForecast = parseWeatherData(weatherData);
 
+            const currentWeather = parseCurrentWeather(weatherData);
+
+            console.log(currentWeather);
+
             //Pass it to state
             setWeatherData(weatherForecast);
+
+            setCurrentWeather(currentWeather);
 
             setLocationName(locationData[0].name);
 
@@ -70,6 +78,23 @@ function WeatherApp(){
             setFetching(false);
         }
     };
+
+    const parseCurrentWeather = (rawData) => {
+        const currentHours = new Date().getHours();
+        const hourIndex = currentHours;
+
+        let currentForecast = {
+            temperature: rawData.hourly.temperature_2m[hourIndex],
+            date: rawData.hourly.time[hourIndex],
+            apparentTemp: rawData.hourly.apparent_temperature[hourIndex],
+            rainProb: rawData.hourly.precipitation_probability[hourIndex],
+            weatherCode: rawData.hourly.weather_code[hourIndex],
+            windSpeed: rawData.hourly.weather_code[hourIndex]
+        }
+
+        return currentForecast;
+    };
+    
 
     const parseWeatherData = (rawData) => {
         const forecast = [];
@@ -110,9 +135,18 @@ function WeatherApp(){
                 </div>
             </div>
 
-            <hr className={`divisionShadow`}/>
+            {locationName !== "" && <hr className={`divisionShadow`}/>}
+
             {isFetching && <p className='text-center'>Fetching data. . .</p>}
             {errorState && <p className='text-center error-text'>An error ocurred while fetching the forecast,<br/>please try again or check your spelling</p>}
+            {!isFetching && locationName !== "" && <h2 className='text-center'>{`${locationName} Current Weather`}</h2>}
+
+            <div className={`container-centered-fixed`}>
+                {locationName !== "" && <WeatherCurrent date={currentWeather.date} temperature={currentWeather.temperature} apparentTemp={currentWeather.apparentTemp} rainProb={currentWeather.rainProb} weatherCode={currentWeather.weatherCode} windSpeed={currentWeather.windSpeed}/>}
+            </div>
+
+            {locationName !== "" && <hr className={`divisionShadow`}/>}
+
             {!isFetching && locationName !== "" && <h2 className='text-center'>{`${locationName} Forecast`}</h2>}
             <div className={`container-centered`}>
                 {!isFetching && <WeatherForecast forecastData={weatherData}/>}

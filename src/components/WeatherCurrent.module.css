@@ -1,0 +1,77 @@
+.h2 {
+    margin: 0;
+}
+
+.header{
+    background-color: #3a8dde;
+    border-radius: 14px 14px 0 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+
+.forecastImg {
+    min-width: 64px;
+    min-height: 64px;
+    max-width: 128px;
+    max-height: 128px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+}
+
+.card {
+    border: 1px solid;
+    border-radius: 16px;
+    max-width: 600px;
+    min-width: 300px;
+}
+
+.flexItem {
+    flex:1;
+}
+
+.p1 {
+    padding: 1rem;
+}
+
+.pb1 {
+    padding-bottom: 1rem;
+}
+
+.ps1 {
+    padding-left: 1rem;
+}
+
+.textCenter {
+    text-align: center;
+}
+
+.weatherState {
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.h100 {
+    height: 100%;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.divisionShadow {
+    width: 80%;
+    border: none;
+    border-top: 1px solid rgba(0,0,0, 0.3);
+    box-shadow: 0px 2px 6px rgba(0,0,0,0.3);
+}

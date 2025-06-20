@@ -49,6 +49,9 @@ h1 {
   flex-direction: row;
 }
 
+.container-centered-fixed {
+}
+
 .text-center {
   text-align: center;
 }
