@@ -4,6 +4,10 @@ Web app developed in React that fetches a 7-day forecast based on user city quer
 
 # Features
 
+* Query any city.
+* Shows current weather.
+* 7-Day weather forecast.
+
 ## Requirements
 
 * Node
