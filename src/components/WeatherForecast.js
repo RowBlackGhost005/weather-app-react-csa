@@ -1,3 +1,5 @@
+import React from 'react';
+
 import WeatherCard from './WeatherCard';
 
 function WeatherForecast({forecastData}) {

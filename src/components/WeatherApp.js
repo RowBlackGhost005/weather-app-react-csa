@@ -62,8 +62,6 @@ function WeatherApp(){
 
             const currentWeather = parseCurrentWeather(weatherData);
 
-            console.log(currentWeather);
-
             //Pass it to state
             setWeatherData(weatherForecast);
 
@@ -126,8 +124,8 @@ function WeatherApp(){
         <div className=''>
             <div className={`text-center container-centered`}>
                 <div className={`form-input my-1 mx-auto`}>
-                    <label className={`form-label-bold`} htmlFor='citySearch'>City: </label>
-                    <input className={`text-input`} type='text' name='citySearch' value={city} onChange={handleCityQuery}></input>
+                    <label className={`form-label-bold`} htmlFor='citySearch'>City:</label>
+                    <input className={`text-input`} type='text' name='citySearch' id='citySearch' value={city} onChange={handleCityQuery}></input>
                 </div>
                 
                 <div className={`mb-1`}>
@@ -138,16 +136,16 @@ function WeatherApp(){
             {locationName !== "" && <hr className={`divisionShadow`}/>}
 
             {isFetching && <p className='text-center'>Fetching data. . .</p>}
-            {errorState && <p className='text-center error-text'>An error ocurred while fetching the forecast,<br/>please try again or check your spelling</p>}
-            {!isFetching && locationName !== "" && <h2 className='text-center'>{`${locationName} Current Weather`}</h2>}
+            {errorState && <p className='text-center error-text'>An error ocurred while fetching the forecast, please try again or check your spelling</p>}
+            {!isFetching && locationName !== "" && !errorState && <h2 className='text-center'>{`${locationName} Current Weather`}</h2>}
 
             <div className={`container-centered-fixed`}>
-                {locationName !== "" && <WeatherCurrent date={currentWeather.date} temperature={currentWeather.temperature} apparentTemp={currentWeather.apparentTemp} rainProb={currentWeather.rainProb} weatherCode={currentWeather.weatherCode} windSpeed={currentWeather.windSpeed}/>}
+                {locationName !== "" && !errorState && <WeatherCurrent date={currentWeather.date} temperature={currentWeather.temperature} apparentTemp={currentWeather.apparentTemp} rainProb={currentWeather.rainProb} weatherCode={currentWeather.weatherCode} windSpeed={currentWeather.windSpeed}/>}
             </div>
 
-            {locationName !== "" && <hr className={`divisionShadow`}/>}
+            {locationName !== "" && !errorState && <hr className={`divisionShadow`}/>}
 
-            {!isFetching && locationName !== "" && <h2 className='text-center'>{`${locationName} Forecast`}</h2>}
+            {!isFetching && locationName !== "" && !errorState && <h2 className='text-center'>{`${locationName} Forecast`}</h2>}
             <div className={`container-centered`}>
                 {!isFetching && <WeatherForecast forecastData={weatherData}/>}
             </div>

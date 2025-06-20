@@ -1,3 +1,6 @@
+import React from 'react';
+
+
 import styles from './WeatherCurrent.module.css';
 
 import weather from '../assets/weather-images/sunny.png';
