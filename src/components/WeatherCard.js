@@ -1,21 +1,25 @@
 import styles from './WeatherCard.module.css';
 
+import {useState} from 'react';
+
 import forecastImg from '../assets/weather-images/sunny.png';
 
-function WeatherCard(){
+import {resolveWeatherCode , resolveWeatherCodeName} from '../utils/WeatherCodeResolver';
 
-    //Stores a single day forecast
+function WeatherCard({date , tempAvg , tempMax, tempMin , rainProb , windMean , weatherCode}){
+
+    const dateString = new Date(date);
 
     return(
         <div className={`${styles.weatherCard} ${styles.cardText}`}>
             <div className={`${styles.textCenter} ${styles.weatherCardHeader} ${styles.headerText}`}>
-                <p>{`Tue , Jun 19`}</p>
+                <p>{dateString.toLocaleDateString("en-US", { weekday: 'long', day: 'numeric' , month: 'long'})}</p>
             </div>
 
             <div className={`${styles.textCenter}`}>
-                <img className={`${styles.forecastImg}`} src={forecastImg} alt='Forecast Representation'/>
-                <p className={`${styles.textAccent} ${styles.fontLarge} ${styles.my1}`}>{`28°C`}</p>
-                <p className={`${styles.textAccent} ${styles.fontLarge}`}>{`Sunny`}</p>
+                <img className={`${styles.forecastImg}`} src={resolveWeatherCode(weatherCode)} alt='Forecast Representation'/>
+                <p className={`${styles.textAccent} ${styles.fontLarge} ${styles.my1}`}>{`${tempAvg}°C`}</p>
+                <p className={`${styles.textAccent} ${styles.fontLarge}`}>{resolveWeatherCodeName(weatherCode)}</p>
             </div>
 
             <hr className={`${styles.divisionShadow}`}/>
@@ -23,12 +27,12 @@ function WeatherCard(){
             <div className={`${styles.flexRow} ${styles.my1}`}>
                 <div className={`${styles.flexItem} ${styles.textEnd}`}>
                     <p>Max</p>
-                    <p>{`31°C`}</p>
+                    <p>{`${tempMax}°C`}</p>
                 </div>
                 
                 <div className={`${styles.flexItem} ${styles.textStart}`}>
                     <p>Min</p>
-                    <p>{`24°C`}</p>
+                    <p>{`${tempMin}°C`}</p>
                 </div>
             </div>
 
@@ -36,12 +40,12 @@ function WeatherCard(){
 
             <div className={`${styles.textCenter} ${styles.my1}`}>
                 <p>Rain Probability</p>
-                <p>{`30%`}</p>
+                <p>{`${rainProb}%`}</p>
             </div>
 
             <div className={`${styles.textCenter} ${styles.my1}`}>
                 <p>Wind Speeds</p>
-                <p>{`15 km/h`}</p>
+                <p>{`${windMean} km/h`}</p>
             </div>
         </div>
     )

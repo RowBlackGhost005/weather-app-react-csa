@@ -1,12 +1,22 @@
 import WeatherCard from './WeatherCard';
 
-function WeatherForecast() {
+function WeatherForecast({forecastData}) {
 
     //Stores data for Forecast and displays it in single weather carsd
 
     return(
-        <div>
-            <WeatherCard/>
+        <div className='grid-container mx-auto'>
+            {forecastData.map(forecast => (
+                <WeatherCard
+                    key={forecast.date}
+                    date={forecast.date}
+                    tempAvg={forecast.tempMean}
+                    tempMin={forecast.tempMin}
+                    tempMax={forecast.tempMax}
+                    rainProb={forecast.rainProb}
+                    windMean={forecast.windMean}
+                    weatherCode={forecast.weatherCode}/>
+            ))}
         </div>
     );
 };
